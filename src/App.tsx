@@ -10,13 +10,20 @@ function App() {
 
   useEffect(() => {
     async function fetchFilms() {
-      const result = await fetch("https://ghibliapi.vercel.app/films");
-      const data: Film[] = await result.json(); 
-      const dataOrdered = data.sort((filmA, filmB) => 
-        filmA.title.localeCompare(filmB.title)
-      );
-      setFilms(dataOrdered);
+      try {
+        const result = await fetch("https://ghibliapi.vercel.app/films");
+        const data: Film[] = await result.json(); 
+        const dataOrdered = data.sort((filmA, filmB) => 
+          filmA.title.localeCompare(filmB.title)
+        );
+        const dataSliced = dataOrdered.slice(0,10);
 
+        setFilms(dataSliced);
+      } catch {
+        setError("Erro ao buscar os filmes");
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchFilms();

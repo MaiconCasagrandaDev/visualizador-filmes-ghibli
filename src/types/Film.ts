@@ -4,4 +4,5 @@ export type Film = {
     description: string
     release_date: string
     rt_score: string
+    movie_banner: string
 }

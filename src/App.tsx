@@ -12,15 +12,22 @@ function App() {
     async function fetchFilms() {
       try {
         const result = await fetch("https://ghibliapi.vercel.app/films");
-        const data: Film[] = await result.json(); 
-        const dataOrdered = data.sort((filmA, filmB) => 
+        if (!result.ok) {
+          throw new Error("Erro ao buscar os filmes");
+        }
+        const data: Film[] = await result.json();
+        const dataOrdered = data.sort((filmA, filmB) =>
           filmA.title.localeCompare(filmB.title)
         );
-        const dataSliced = dataOrdered.slice(0,10);
+        const dataSliced = dataOrdered.slice(0, 10);
 
         setFilms(dataSliced);
-      } catch {
-        setError("Erro ao buscar os filmes");
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Erro ao buscar os filmes");
+        }
       } finally {
         setLoading(false);
       }
@@ -38,7 +45,10 @@ function App() {
 
         <ul>
           {films.map((film) => (
-            <li  key={film.id}> {film.title}</li>
+            <li key={film.id}>
+              {film.title}
+              <img src={film.movie_banner} alt={film.title} />
+            </li>
           ))}
         </ul>
       </div>

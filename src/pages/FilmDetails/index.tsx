@@ -6,16 +6,32 @@ function FilmDetails() {
     const { id } = useParams()
 
     const [film, setFilm] = useState<Film | null>(null)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         async function fetchFilm() {
-            const result = await fetch(`https://ghibliapi.vercel.app/films/${id}`)
-            const data = await result.json()
+            try {
+                const result = await fetch(`https://ghibliapi.vercel.app/films/${id}`)
 
-            setFilm(data)
+                if (!result.ok) {
+                    throw new Error("Erro ao buscar detalhes do filme")
+                }
+
+                const data = await result.json()
+
+                setFilm(data)
+            } catch (error) {
+                setError("Erro ao buscar detalhes do filme")
+            }finally {
+
+            }
         }
         fetchFilm()
     }, [id])
+
+    if (error) {
+        return <p>Erro: {error}</p>
+    }
 
     if (!film) {
         return <p>Loading...</p>

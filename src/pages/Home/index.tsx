@@ -48,9 +48,10 @@ function Home() {
                 {loading && <p className="text-red-500">Loading...</p>}
                 {error && <p> Erro: {error}</p>}
 
-                <ul>
+                <ul className="grid grid-cols-3 gap-6">
                     {films.map((film) => (
-                        <li key={film.id}>
+                        <li key={film.id}
+                            className="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
                             <Link to={`/film/${film.id}`}>
                                 <h2>{film.title}</h2>
                                 <img src={film.movie_banner} alt={film.title} />

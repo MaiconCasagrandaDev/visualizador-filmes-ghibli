@@ -7,7 +7,7 @@ function FilmDetails() {
 
     const [film, setFilm] = useState<Film | null>(null)
     const [error, setError] = useState<string | null>(null)
-
+    
     useEffect(() => {
         async function fetchFilm() {
             try {

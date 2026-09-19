@@ -35,8 +35,8 @@
     --color-footer-bg: hsl(37, 12%, 16%);
     --color-footer-hover: hsl(43, 15%, 85%);
 
-    --font-display: 'Fredoka' , sans-serif;
-    --font-body: 'Nunito' , sans-serif;
+    --font-display: 'Fredoka', sans-serif;
+    --font-body: 'Nunito', sans-serif;
 
 }
 
@@ -45,7 +45,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('./fonts/Fredoka-Regular.ttf') format('.ttf');
+    src: url('../assets/fonts/Fredoka-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -53,7 +53,7 @@
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url('./fonts/Fredoka-SemiBold.ttf') format('.ttf');
+    src: url('../assets/fonts/Fredoka-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -61,6 +61,5 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('./fonts/Nunito-Regular.ttf') format('.ttf');
+    src: url('../assets/fonts/Nunito-Regular.ttf') format('truetype');
 }
-

@@ -44,21 +44,26 @@ function Home() {
 
     return (
         <>
-            <div>
-                {loading && <p className="text-red-500">Loading...</p>}
-                {error && <p> Erro: {error}</p>}
+            <div className="max-w-7xl mx-auto px-6 bg-background">
+                {loading && <p className="text-error">Loading...</p>}
+                {error && <p className="text-error"> Erro: {error}</p>}
 
-                <ul className="grid grid-cols-3 gap-6">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
                     {films.map((film) => (
                         <li key={film.id}
-                            className="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                            className="border border-border rounded-lg overflow-hidden shadow-sm bg-surface">
                             <Link to={`/film/${film.id}`}>
-                                <h2>{film.title}</h2>
-                                <img src={film.movie_banner} alt={film.title} />
+                                <img 
+                                src={film.movie_banner} 
+                                alt={film.title}
+                                className="w-full h-64 object-cover"/>
                             </Link>
-                            <div>
-                                <p>📅 Lançamento: {film.release_date}</p>
-                                <p>⭐Nota: {film.rt_score}</p>
+                            <div className="p-4">
+                                <h2 className="font-display text-lg text-heading">{film.title}</h2>
+                                <div className="font-body flex items-center justify-between mt-2 text-sm text-text-secondary">
+                                    <span>📅 Lançamento: {film.release_date}</span>
+                                    <span>⭐Nota: {film.rt_score}</span>
+                                </div>
                             </div>
                         </li>
                     ))}

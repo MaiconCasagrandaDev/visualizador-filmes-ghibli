@@ -7,33 +7,40 @@ function Home() {
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
 
+    // useEffect executa uma única vez ao montar o componente.
+    // Ele busca os filmes da API do Studio Ghibli e atualiza o estado.
     useEffect(() => {
         async function fetchFilms() {
             try {
                 const result = await fetch("https://ghibliapi.vercel.app/films");
 
+                // Se a resposta não estiver ok, dispara um erro.
                 if (!result.ok) {
                     throw new Error("Erro ao buscar os filmes");
                 }
 
                 const data: Film[] = await result.json();
 
+                // Ordena os filmes por título em ordem alfabética.
                 const dataOrdered = data.sort((filmA, filmB) =>
                     filmA.title.localeCompare(filmB.title)
                 );
 
+                // Limita a exibição para os 12 primeiros filmes.
                 const dataSliced = dataOrdered.slice(0, 12);
 
+                // Atualiza o estado com os filmes filtrados.
                 setFilms(dataSliced);
 
             } catch (error) {
-
+                // Captura a mensagem do erro para mostrar na tela.
                 if (error instanceof Error) {
                     setError(error.message);
                 } else {
                     setError("Erro ao buscar os filmes");
                 }
             } finally {
+                // Mesmo com erro ou sucesso, o carregamento termina.
                 setLoading(false);
             }
         }
@@ -49,7 +56,9 @@ function Home() {
                     <h1 className="font-display text-4xl md:text-5xl text-heading">
                         Studio Ghibli
                     </h1>
-                    <p className="font-body text-text-secondary mt-4 max-w-xl mx-auto">Explore os mundos fantásticos criados pelo Studio Ghibli - histórias cheias de magia, natureza e personagens inesquecíveis.</p>
+                    <p className="font-body text-text-secondary mt-4 max-w-xl mx-auto">
+                        Explore os mundos fantásticos criados pelo Studio Ghibli - histórias cheias de magia, natureza e personagens inesquecíveis.
+                    </p>
                 </section>
 
                 <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-6"></div>
@@ -58,19 +67,37 @@ function Home() {
                     Filmes em destaques
                 </h2>
 
-                {loading && <p className="text-error">Loading...</p>}
-                {error && <p className="text-error"> Erro: {error}</p>}
+                {loading && (
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
+                        {Array.from({ length: 6 }).map((_, index) => (
+                            <li key={index} className="border border-border rounded-lg overflow-hidden bg-surface">
+                                <div className="w-full h-64 bg-surface-alt animate-pulse"></div>
+                                <div className="p-4 space-y-2">
+                                    <div className="h-5 bg-surface-alt rounded animate-pulse w-3/4"></div>
+                                    <div className="h-4 bg-surface-alt rounded animate-pulse w-1/2"></div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
+                {/* Se houver erro na requisição, mostra a mensagem para o usuário */}
+                {error && <p className="text-error text-center"> Erro: {error}</p>}
+
+                {/* Renderiza a grade com os filmes já carregados */}
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
                     {films.map((film) => (
                         <li key={film.id}
-                            className="group border border-border rounded-lg overflow-hidden shadow-sm bg-surface transition duration-200 hover:shadow-lg hover:-translate-y-1">
+                            className="group border border-border rounded-lg overflow-hidden shadow-sm bg-surface transition duration-200 hover:shadow-lg">
+                            {/* Link para navegar até a página de detalhes do filme */}
                             <Link to={`/film/${film.id}`}>
-                                <img 
-                                src={film.movie_banner} 
-                                alt={film.title}
-                                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"/>
+                                <img
+                                    src={film.movie_banner}
+                                    alt={film.title}
+                                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                                />
                             </Link>
+
                             <div className="p-4">
                                 <h2 className="font-display text-lg text-heading">{film.title}</h2>
                                 <div className="font-body flex items-center justify-between mt-2 text-sm text-text-secondary">

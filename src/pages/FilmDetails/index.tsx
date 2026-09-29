@@ -72,8 +72,8 @@ function FilmDetails() {
                 <span>⭐ {film.rt_score}</span>
             </div>
 
-            <div className="bg-surface border border-border rounded-lg p-6 mt-8">
-                <h2 className="font-display text-xl text-heading mb-3">
+            <div className="bg-surface border-l-4 border-l-primary rounded-lg p-10 mt-8 shadow-sm">
+                <h2 className="font-display text-xl text-heading mb-4 flex items-center gap-2">
                     Sobre o filme
                 </h2>
                 <p className="font-body text-text leading-relaxed">

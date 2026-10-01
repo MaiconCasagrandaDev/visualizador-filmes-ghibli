@@ -6,7 +6,7 @@ Catálogo interativo dos filmes do Studio Ghibli, consumindo a [Ghibli API](http
 
 ## 📸 Preview
 
-![Preview do Visualizador de Filmes Ghibli](./public/studio-ghibli.png)
+![Preview do Visualizador de Filmes Ghibli](./public/preview.png)
 
 ## ✨ Funcionalidades
 

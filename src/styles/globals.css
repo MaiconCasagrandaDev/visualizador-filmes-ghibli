@@ -63,3 +63,7 @@
     font-display: swap;
     src: url('../assets/fonts/Nunito-Regular.ttf') format('truetype');
 }
+
+input:focus {
+    outline:none;
+}

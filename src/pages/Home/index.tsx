@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Film } from "../../types/Film";
-import { Link } from "react-router-dom";
+import { FilmCard } from "../../components/FilmCard";
 
 function Home() {
     const [films, setFilms] = useState<Film[]>([])
@@ -85,23 +85,7 @@ function Home() {
 
                         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
                             {filteredFilms.map((film) => (
-                                <li key={film.id}
-                                    className="group border-2 border-primary/30 rounded-lg overflow-hidden shadow-sm bg-surface transition duration-200 hover:shadow-lg">
-                                    <Link to={`/film/${film.id}`}>
-                                        <img
-                                            src={film.movie_banner}
-                                            alt={film.title}
-                                            className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                                        />
-                                    </Link>
-                                    <div className="p-4">
-                                        <h2 className="font-display text-lg text-heading">{film.title}</h2>
-                                        <div className="font-body flex items-center justify-between mt-2 text-sm text-text-secondary">
-                                            <span>📅 Lançamento: {film.release_date}</span>
-                                            <span>⭐Nota: {film.rt_score}</span>
-                                        </div>
-                                    </div>
-                                </li>
+                                <FilmCard key={film.id} film={film} highlighted />
                             ))}
                         </ul>
                     </div>
@@ -131,23 +115,7 @@ function Home() {
                 {!loading && !error && (
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0 mb-12">
                         {featuredFilms.map((film) => (
-                            <li key={film.id}
-                                className="group border border-border rounded-lg overflow-hidden shadow-sm bg-surface transition duration-200 hover:shadow-lg">
-                                <Link to={`/film/${film.id}`}>
-                                    <img
-                                        src={film.movie_banner}
-                                        alt={film.title}
-                                        className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                                    />
-                                </Link>
-                                <div className="p-4">
-                                    <h2 className="font-display text-lg text-heading">{film.title}</h2>
-                                    <div className="font-body flex items-center justify-between mt-2 text-sm text-text-secondary">
-                                        <span>📅 Lançamento: {film.release_date}</span>
-                                        <span>⭐Nota: {film.rt_score}</span>
-                                    </div>
-                                </div>
-                            </li>
+                            <FilmCard key={film.id} film={film} />
                         ))}
                     </ul>
                 )}

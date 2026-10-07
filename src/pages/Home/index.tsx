@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FilmCard } from "../../components/FilmCard";
 import { useFilms } from "../../hooks/useFilms";
 
 function Home() {
     const { films, loading, error } = useFilms();
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const searchRef = useRef<HTMLInputElement>(null);
+
+    const sccrollToSearch = () => {
+        searchRef.current?.scrollIntoView({behavior: "smooth", block: "start"});
+    }
 
     const filteredFilms = films.filter((film) =>
         film.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -28,11 +33,13 @@ function Home() {
 
                 {/* ===== BUSCA (destaque principal) ===== */}
                 <input
+                    ref={searchRef}
                     type="text"
                     placeholder="Buscar filme..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="font-body w-full max-w-lg mx-auto block border-2 border-primary rounded-lg px-5 py-3 mb-10 text-text text-lg shadow-sm focus:ring-2 focus:ring-primary"
+                    onFocus={sccrollToSearch}
+                    className="font-body w-full max-w-lg mx-auto block border-2 border-primary rounded-lg px-5 py-3 mb-10 text-text text-lg shadow-sm focus:ring-2 focus:ring-primary scroll-mt-24"
                 />
 
                 <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-6"></div>

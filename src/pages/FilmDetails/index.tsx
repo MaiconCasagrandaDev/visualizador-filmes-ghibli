@@ -44,20 +44,38 @@ function FilmDetails() {
                 {film.title}
             </h1>
 
-            <div className="font-body flex items-center gap-4 mt-2 text-text-secondary">
+            <div className="font-body flex flex-wrap items-center gap-4 mt-2 text-text-secondary">
                 <span>📅 {film.release_date}</span>
                 <span>⭐ {film.rt_score}</span>
+                <span>⏱ {film.running_time} min</span>
             </div>
 
-            <div className="bg-surface border-l-4 border-l-primary rounded-lg p-10 mt-8 shadow-sm">
-                <h2 className="font-display text-xl text-heading mb-4 flex items-center gap-2">
-                    Sobre o filme
-                </h2>
-                <p className="font-body text-text leading-relaxed">
-                    {film.description}
-                </p>
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div className="md:col-span-2 bg-surface border-l-4 border-l-primary rounded-lg p-10 shadow-sm">
+                    <h2 className="font-display text-xl text-heading mb-4 flex items-center gap-2">
+                        Sobre o filme
+                    </h2>
+                    <p className="font-body text-text leading-relaxed">
+                        {film.description}
+                    </p>
+                </div>
 
+                <div className="bg-surface border-l-4 border-l-accent rounded-lg p-6 shadow-sm self-start">
+                    <h2 className="font-display text-xl text-heading mb-4">
+                        Ficha técnica
+                    </h2>
+
+                    <div className="font-body">
+                        <p className="text-sm text-text-secondary">Diretor</p>
+                        <p className="text-text">{film.director}</p>
+                    </div>
+
+                    <div className="font-body mt-4">
+                        <p className="text-sm text-text-secondary">Produtor</p>
+                        <p className="text-text">{film.producer}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

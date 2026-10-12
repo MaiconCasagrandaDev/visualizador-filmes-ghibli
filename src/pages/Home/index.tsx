@@ -20,7 +20,7 @@ function Home() {
                 </p>
                 <Link
                     to="/filmes"
-                    className="font-body inline-block mt-6 bg-primary text-background rounded-lg px-6 py-3 hover:opacity-90 transition"
+                    className="font-body inline-block mt-10 bg-primary text-background rounded-lg px-6 py-3 hover:opacity-90 transition"
                 >
                     Ver todos os filmes
                 </Link>

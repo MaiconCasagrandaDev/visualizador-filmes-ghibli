@@ -64,6 +64,7 @@
     src: url('../assets/fonts/Nunito-Regular.ttf') format('truetype');
 }
 
-input:focus {
+input:focus,
+select:focus {
     outline:none;
 }

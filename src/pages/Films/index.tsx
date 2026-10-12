@@ -37,15 +37,21 @@ function Films() {
                     className="font-body flex-1 border-2 border-primary rounded-lg px-5 py-3 text-text text-lg shadow-sm focus:ring-2 focus:ring-primary"
                 />
 
-                <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as SortOption)}
-                    className="font-body bg-surface border border-border rounded-lg px-4 py-3 text-text"
-                >
-                    <option value="title">Título (A-Z)</option>
-                    <option value="rating">Melhor nota</option>
-                    <option value="year">Mais antigos primeiro</option>
-                </select>
+                <div className="relative">
+                    <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value as SortOption)}
+                        className="font-body appearance-none w-full bg-surface border-2 border-primary rounded-lg pl-4 pr-10 py-3 text-text cursor-pointer focus:ring-2 focus:ring-primary"
+                    >
+                        <option value="title">Título (A-Z)</option>
+                        <option value="rating">Melhor nota</option>
+                        <option value="year">Mais antigos primeiro</option>
+                    </select>
+
+                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-primary text-xl">
+                        ▾
+                    </span>
+                </div>
             </div>
 
             {loading && (
